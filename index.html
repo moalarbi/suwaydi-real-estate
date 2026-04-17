@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكاتب العقارات — حي السويدي، الرياض</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #F2EDE3;
+    --card-bg:   #FAF6EC;
+    --ink:       #3A2E20;
+    --accent:    #C97554;
+    --border:    3px solid #3A2E20;
+    --shadow:    5px 5px 0px #2A2218;
+    --shadow-sm: 3px 3px 0px #2A2218;
+    --radius:    4px;
+    --font:      'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 24px 16px 60px;
+  }
+
+  /* ── Header ── */
+  header {
+    max-width: 860px;
+    margin: 0 auto 36px;
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    background: var(--accent);
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -30px; left: -30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  header .badge {
+    display: inline-block;
+    background: var(--ink);
+    color: #F2EDE3;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 700;
+    color: #FAF6EC;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  header p {
+    font-size: 13px;
+    color: rgba(250,246,236,0.85);
+  }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    max-width: 860px;
+    margin: 0 auto 28px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1 1 120px;
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    background: var(--card-bg);
+    padding: 14px 18px;
+    text-align: center;
+  }
+  .stat strong { display: block; font-size: 24px; font-weight: 700; color: var(--accent); }
+  .stat span   { font-size: 11px; color: var(--ink); opacity: 0.7; }
+
+  /* ── Search bar ── */
+  .search-wrap {
+    max-width: 860px;
+    margin: 0 auto 28px;
+  }
+  .search-wrap input {
+    width: 100%;
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    background: var(--card-bg);
+    padding: 12px 18px;
+    font-family: var(--font);
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: box-shadow 0.15s;
+  }
+  .search-wrap input:focus { box-shadow: 6px 6px 0 var(--accent); }
+  .search-wrap input::placeholder { opacity: 0.5; }
+
+  /* ── Grid ── */
+  .grid {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+
+  /* ── Card ── */
+  .card {
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    background: var(--card-bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0px #2A2218;
+  }
+
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .card-name { font-size: 15px; font-weight: 700; line-height: 1.3; flex: 1; }
+
+  .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .rating .star { color: var(--accent); font-size: 12px; }
+
+  .card-meta { display: flex; flex-direction: column; gap: 6px; }
+  .meta-row  { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; }
+  .meta-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .meta-val  { color: var(--ink); opacity: 0.8; line-height: 1.4; }
+
+  .hours-tag {
+    font-size: 11px;
+    background: #eee6d7;
+    border: 1px solid #c9b89a;
+    border-radius: 2px;
+    padding: 2px 7px;
+    color: var(--ink);
+    width: fit-content;
+  }
+
+  .card-footer { border-top: 2px solid var(--ink); padding-top: 12px; margin-top: auto; }
+
+  .btn-call {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background: var(--accent);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    color: #FAF6EC;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .btn-call:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #2A2218; }
+  .btn-call:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 #2A2218; }
+
+  .btn-maps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    background: transparent;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .btn-maps:hover { background: rgba(58,46,32,0.06); }
+
+  .no-phone {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink);
+    opacity: 0.4;
+    padding: 8px 0 4px;
+  }
+
+  /* ── No results ── */
+  #no-results {
+    display: none;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px;
+    border: var(--border);
+    border-radius: var(--radius);
+    background: var(--card-bg);
+    font-size: 15px;
+    opacity: 0.6;
+  }
+
+  /* ── Footer ── */
+  footer {
+    max-width: 860px;
+    margin: 40px auto 0;
+    border-top: var(--border);
+    padding-top: 16px;
+    font-size: 12px;
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: 1fr; }
+    .stats-bar { gap: 8px; }
+    header { padding: 20px 20px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">📍 حي السويدي — الرياض</div>
+  <h1>مكاتب العقارات<br>للإيجار والبيع</h1>
+  <p>دليل مكاتب العقارات في الحي — اتصل مباشرة بضغطة واحدة</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><strong id="total-count">17</strong><span>مكتب عقاري</span></div>
+  <div class="stat"><strong id="phone-count">15</strong><span>رقم متوفر</span></div>
+  <div class="stat"><strong>السويدي</strong><span>الرياض</span></div>
+</div>
+
+<div class="search-wrap">
+  <input type="search" id="search-input" placeholder="🔍  ابحث باسم المكتب أو الشارع..." oninput="filterCards()" />
+</div>
+
+<div class="grid" id="cards-grid"></div>
+<div id="no-results">لا توجد نتائج مطابقة — جرب كلمة أخرى</div>
+
+<footer>
+  آخر تحديث: أبريل 2025 · المصدر: Google Maps · للاستخدام الشخصي فقط
+</footer>
+
+<script>
+const offices = [
+  {
+    name: "مكتب الدعيجي للعقارات",
+    address: "شارع الشيخ عبدالله بن محمد، السويدي، الرياض 12786",
+    phone: "+966554280666",
+    phoneDisplay: "055 428 0666",
+    hours: "4:00 – 9:00 م (الجمعة مغلق)",
+    rating: 4.5,
+    reviews: 53,
+    lat: 24.5954765, lng: 46.6717345
+  },
+  {
+    name: "مكتب منشأة الغد للعقارات",
+    address: "4172 البلد الأمين، السويدي، الرياض 12787",
+    phone: "+966546609682",
+    phoneDisplay: "054 660 9682",
+    hours: "4:00 – 9:30 م (الجمعة مغلق)",
+    rating: 4.7,
+    reviews: 24,
+    lat: 24.5920371, lng: 46.6652576
+  },
+  {
+    name: "ارجاء نجد للعقارات",
+    address: "4455 البلد الأمين، السويدي، الرياض 12787",
+    phone: "+966553727999",
+    phoneDisplay: "055 372 7999",
+    hours: "4:00 – 10:00 م (الجمعة مغلق)",
+    rating: 3.3,
+    reviews: 128,
+    lat: 24.5941009, lng: 46.66862
+  },
+  {
+    name: "مكتب الحميضي للعقارات",
+    address: "4791 السويدي العام، السويدي، الرياض 12792",
+    phone: "+966505274265",
+    phoneDisplay: "050 527 4265",
+    hours: "—",
+    rating: 4.5,
+    reviews: 6,
+    lat: 24.5979971, lng: 46.6857103
+  },
+  {
+    name: "Property Office Building Real Estate",
+    address: "7694 حنين، السويدي، الرياض 12785",
+    phone: "+966114186666",
+    phoneDisplay: "011 418 6666",
+    hours: "4:00 – 10:00 م (الجمعة مغلق)",
+    rating: 3.7,
+    reviews: 31,
+    lat: 24.5963725, lng: 46.6800555
+  },
+  {
+    name: "مكتب آل قعود للعقارات",
+    address: "شارع عبدالملك بن هشام، السويدي، الرياض 12787",
+    phone: null,
+    phoneDisplay: null,
+    hours: "4:00 م – 12:00 ص",
+    rating: 5.0,
+    reviews: 5,
+    lat: 24.5929473, lng: 46.6705913
+  },
+  {
+    name: "اللحيدان للعقارات",
+    address: "البلد الأمين، السويدي، الرياض 12788",
+    phone: "+966505287168",
+    phoneDisplay: "050 528 7168",
+    hours: "5:30 – 10:30 م (الجمعة-السبت مغلق)",
+    rating: 4.0,
+    reviews: 20,
+    lat: 24.5888201, lng: 46.6593113
+  },
+  {
+    name: "مكتب المبخوت للعقارات",
+    address: "السويدي، الرياض 12788",
+    phone: "+966556677332",
+    phoneDisplay: "055 667 7332",
+    hours: "—",
+    rating: 3.8,
+    reviews: 4,
+    lat: 24.58639, lng: 46.65618
+  },
+  {
+    name: "مكتب فهد الشرمي للعقارات",
+    address: "شارع السويدي العام، السويدي، الرياض 12792",
+    phone: "+966555457732",
+    phoneDisplay: "055 545 7732",
+    hours: "3:00 – 11:00 م (الجمعة مغلق)",
+    rating: 4.0,
+    reviews: 55,
+    lat: 24.5984961, lng: 46.6905344
+  },
+  {
+    name: "مكتب لان الأعمال للعقارات",
+    address: "السويدي العام، السويدي، الرياض 12787",
+    phone: "+966557266476",
+    phoneDisplay: "055 726 6476",
+    hours: "9:00 ص – 11:00 م (طوال الأسبوع)",
+    rating: 4.7,
+    reviews: 7,
+    lat: 24.5870546, lng: 46.666960
+  },
+  {
+    name: "مجموعة أحمد البجادي للتطوير العقاري",
+    address: "البلد الأمين، السويدي، الرياض 12788",
+    phone: "+966920002313",
+    phoneDisplay: "9200 02313",
+    hours: "9:00 ص – 12:00 م | 4:14 – 9:45 م",
+    rating: 3.9,
+    reviews: 72,
+    lat: 24.5873219, lng: 46.6575883
+  },
+  {
+    name: "البوارديي للعقارات",
+    address: "عائشة بنت أبي بكر، السويدي، الرياض 12795",
+    phone: "+966114246092",
+    phoneDisplay: "011 424 6092",
+    hours: "4:00 – 10:00 م (الجمعة مغلق)",
+    rating: 2.8,
+    reviews: 12,
+    lat: 24.57992, lng: 46.659318
+  },
+  {
+    name: "مكتب القمة التنفيذي للخدمات العقارية",
+    address: "بديع الزمان الهمداني، الزهرة، الرياض 12987",
+    phone: "+966500141485",
+    phoneDisplay: "050 014 1485",
+    hours: "4:00 – 9:00 م (الجمعة مغلق)",
+    rating: 4.0,
+    reviews: 26,
+    lat: 24.5740192, lng: 46.6518269
+  },
+  {
+    name: "العجيب للعقارات",
+    address: "الزهرة، الرياض 12987",
+    phone: "+966550280080",
+    phoneDisplay: "055 028 0080",
+    hours: "4:00 – 9:30 م (الجمعة مغلق)",
+    rating: 4.2,
+    reviews: 128,
+    lat: 24.5695625, lng: 46.6490625
+  },
+  {
+    name: "مكتب الدوخي للعقارات",
+    address: "3293 سدير، شبرا، الرياض 12794",
+    phone: "+966555337349",
+    phoneDisplay: "055 533 7349",
+    hours: "4:00 – 10:00 م (الجمعة مغلق)",
+    rating: 4.4,
+    reviews: 25,
+    lat: 24.5826074, lng: 46.6707564
+  },
+  {
+    name: "مكتب الزنان للعقارات",
+    address: "شارع الشيخ عبدالرحمن، الزهرة، الرياض 12985",
+    phone: "+966114244489",
+    phoneDisplay: "011 424 4489",
+    hours: "4:00 – 8:00 م (الجمعة مغلق)",
+    rating: 4.1,
+    reviews: 8,
+    lat: 24.5789873, lng: 46.6591306
+  },
+  {
+    name: "مكتب محمد العجلان للعقارات",
+    address: "سدير، السويدي، الرياض 12794",
+    phone: "+966553433566",
+    phoneDisplay: "055 343 3566",
+    hours: "مفتوح 24 ساعة",
+    rating: 5.0,
+    reviews: 3,
+    lat: 24.5852207, lng: 46.6744632
+  }
+];
+
+function stars(r) {
+  const full = Math.floor(r);
+  const half = r - full >= 0.5;
+  let s = '';
+  for (let i=0;i<full;i++) s+='★';
+  if (half) s+='½';
+  return s;
+}
+
+function mapsUrl(lat, lng, name) {
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${encodeURIComponent(name)}`;
+}
+
+function renderCards(list) {
+  const grid = document.getElementById('cards-grid');
+  const noRes = document.getElementById('no-results');
+  grid.innerHTML = '';
+  if (list.length === 0) { noRes.style.display = 'block'; return; }
+  noRes.style.display = 'none';
+  list.forEach(o => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-name">${o.name}</div>
+        <div class="rating">
+          <span class="star">★</span>
+          ${o.rating.toFixed(1)}
+          <span style="opacity:.6;font-weight:400">(${o.reviews})</span>
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <span class="meta-icon">📍</span>
+          <span class="meta-val">${o.address}</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-icon">🕐</span>
+          <span class="meta-val">${o.hours}</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        ${o.phone
+          ? `<a class="btn-call" href="tel:${o.phone}">📞 اتصل الآن — ${o.phoneDisplay}</a>`
+          : `<div class="no-phone">📵 رقم غير متوفر</div>`
+        }
+        <a class="btn-maps" href="${mapsUrl(o.lat, o.lng, o.name)}" target="_blank" rel="noopener">
+          🗺️ عرض على الخريطة
+        </a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function filterCards() {
+  const q = document.getElementById('search-input').value.trim().toLowerCase();
+  const filtered = q
+    ? offices.filter(o =>
+        o.name.toLowerCase().includes(q) ||
+        o.address.toLowerCase().includes(q)
+      )
+    : offices;
+  renderCards(filtered);
+}
+
+// Update counts
+document.getElementById('total-count').textContent = offices.length;
+document.getElementById('phone-count').textContent = offices.filter(o => o.phone).length;
+
+renderCards(offices);
+</script>
+</body>
+</html>
