@@ -269,8 +269,8 @@
 </header>
 
 <div class="stats-bar">
-  <div class="stat"><strong id="total-count">17</strong><span>مكتب عقاري</span></div>
-  <div class="stat"><strong id="phone-count">15</strong><span>رقم متوفر</span></div>
+  <div class="stat"><strong id="total-count">0</strong><span>مكتب عقاري</span></div>
+  <div class="stat"><strong id="phone-count">0</strong><span>رقم متوفر</span></div>
   <div class="stat"><strong>السويدي</strong><span>الرياض</span></div>
 </div>
 
@@ -282,7 +282,7 @@
 <div id="no-results">لا توجد نتائج مطابقة — جرب كلمة أخرى</div>
 
 <footer>
-  آخر تحديث: أبريل 2025 · المصدر: Google Maps · للاستخدام الشخصي فقط
+  آخر تحديث: أبريل 2026 · المصدر: Google Maps · للاستخدام الشخصي فقط
 </footer>
 
 <script>
@@ -456,17 +456,98 @@ const offices = [
     rating: 5.0,
     reviews: 3,
     lat: 24.5852207, lng: 46.6744632
+  },
+  {
+    name: "مكتب امان نجد للعقارات",
+    address: "الشيخ عبدالعزيز بن محمد بن علي، السويدي، الرياض",
+    phone: "+966560905080",
+    phoneDisplay: "056 090 5080",
+    hours: "4:00 – 10:00 م",
+    rating: 4.7,
+    reviews: 13,
+    lat: 24.591, lng: 46.665
+  },
+  {
+    name: "مكتب عبدالرحمن عبد العزيز الحميدي للعقارات",
+    address: "6817 لبيد بن ربيعة، الزهرة، الرياض",
+    phone: "+966554220047",
+    phoneDisplay: "055 422 0047",
+    hours: "3:46 – 10:00 م",
+    rating: 4.8,
+    reviews: 5,
+    lat: 24.575, lng: 46.652
+  },
+  {
+    name: "واجهة المستقبل للعقارات",
+    address: "السويدي، الرياض",
+    phone: "+966530012233",
+    phoneDisplay: "053 001 2233",
+    hours: "4:00 – 10:00 م",
+    rating: 4.8,
+    reviews: 6,
+    lat: 24.585, lng: 46.667
+  },
+  {
+    name: "مكتب البدرين للخدمات العقارية",
+    address: "البلد الأمين، السويدي، الرياض",
+    phone: "+966561003755",
+    phoneDisplay: "056 100 3755",
+    hours: "—",
+    rating: 4.0,
+    reviews: 2,
+    lat: 24.592, lng: 46.660
+  },
+  {
+    name: "مكتب الأمان والتميز للعقارات",
+    address: "6775 الطريق الدائري الجنوبي، السويدي، الرياض",
+    phone: "+966568299935",
+    phoneDisplay: "056 829 9935",
+    hours: "9:00 ص – 10:00 م",
+    rating: 3.8,
+    reviews: 19,
+    lat: 24.570, lng: 46.660
+  },
+  {
+    name: "مكتب فهد الوهابي للخدمات العقارية",
+    address: "الشيخ عبدالله بن محمد، السويدي، الرياض",
+    phone: "+966550625510",
+    phoneDisplay: "055 062 5510",
+    hours: "6:00 – 10:00 م",
+    rating: 4.3,
+    reviews: 6,
+    lat: 24.596, lng: 46.672
+  },
+  {
+    name: "مكتب قمة البيان للعقارات",
+    address: "السويدي، الرياض",
+    phone: "+966506220390",
+    phoneDisplay: "050 622 0390",
+    hours: "3:00 – 10:00 م",
+    rating: 4.6,
+    reviews: 18,
+    lat: 24.580, lng: 46.660
+  },
+  {
+    name: "مكتب المالكي للعقارات",
+    address: "السويدي، الرياض",
+    phone: "+966504456479",
+    phoneDisplay: "050 445 6479",
+    hours: "4:00 – 10:00 م",
+    rating: 3.8,
+    reviews: 13,
+    lat: 24.582, lng: 46.662
+  },
+  {
+    name: "الطخيم للعقارات",
+    address: "السويدي، الرياض",
+    phone: "+966555446997",
+    phoneDisplay: "055 544 6997",
+    hours: "9:00 ص – 10:00 م",
+    rating: 3.9,
+    reviews: 27,
+    lat: 24.578, lng: 46.668
   }
 ];
-
-function stars(r) {
-  const full = Math.floor(r);
-  const half = r - full >= 0.5;
-  let s = '';
-  for (let i=0;i<full;i++) s+='★';
-  if (half) s+='½';
-  return s;
-}
 
 function mapsUrl(lat, lng, name) {
   return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${encodeURIComponent(name)}`;
@@ -528,7 +609,6 @@ function filterCards() {
 // Update counts
 document.getElementById('total-count').textContent = offices.length;
 document.getElementById('phone-count').textContent = offices.filter(o => o.phone).length;
-
 renderCards(offices);
 </script>
 </body>
